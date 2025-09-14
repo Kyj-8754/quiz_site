@@ -101,7 +101,7 @@ def quiz():
             # Apply clean_option_text to all option columns
             for col in ['보기A', '보기B', '보기C', '보기D']:
                 if col in df.columns:
-                    df[col] = df[col].apply(clean_option_text)
+                    df[col]
 
             session['quiz_data'] = df.to_dict(orient='records')
             random.shuffle(session['quiz_data'])
@@ -135,10 +135,10 @@ def quiz():
 
     # Dynamically set choices for the radio buttons
     form.answer.choices = [
-        ('A', f"A. {clean_option_text(current_question['보기A'])}"),
-        ('B', f"B. {clean_option_text(current_question['보기B'])}"),
-        ('C', f"C. {clean_option_text(current_question['보기C'])}"),
-        ('D', f"D. {clean_option_text(current_question['보기D'])}")
+        ('A', f"A. {(current_question['보기A'])}"),
+        ('B', f"B. {(current_question['보기B'])}"),
+        ('C', f"C. {(current_question['보기C'])}"),
+        ('D', f"D. {(current_question['보기D'])}")
     ]
 
     return render_template('quiz.html', form=form, question=current_question, question_num=current_question_index + 1, total_questions=len(quiz_data))
@@ -157,12 +157,7 @@ def result():
     # Apply clean_option_text to the '정답' column before passing to template
     for q in quiz_data:
         if '정답' in q and isinstance(q['정답'], str) and q['정답']:
-            # Extract only the answer key (A, B, C, D) and convert to uppercase
-            cleaned_answer = clean_option_text(q['정답'])
-            if cleaned_answer:
-                q['정답'] = cleaned_answer[0].upper()
-            else:
-                q['정답'] = '' # Handle case where answer becomes empty after cleaning
+            q['정답'] = q['정답'][0].upper()
         else:
             q['정답'] = '' # Ensure '정답' key exists and has a default value
 
