@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+venv/
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+thumbs.db
+
+# Flask
+instance/
+.flaskenv
+
+# Database
+database.db
+
+# Excel
+*.xlsx
+*.xls
+
+# Logs
+*.log
